@@ -25,7 +25,7 @@ public class SQLSelectStrings {
 			"ON EMP.EMP_WAGE_TYPE_ID = WAGE_TYPE.WAGE_TYPE_ID " +
 			"LEFT JOIN Company.EMPLOYEE_WEEK_HOURS WEEK_HOURS " +
 			"ON EMP.EMP_ID = WEEK_HOURS.EMP_ID " +
-			"WHERE WORK_WEEK.WEEK_ID = 5 ";
+			"WHERE WORK_WEEK.WEEK_ID = ? ";
 	private String DepartmentPayForASelectedWeek = "SELECT DEPARTMENT, SUM(PAY_FOR_SELECTED_WEEK) PAY_FOR_SELECTED_WEEK " +
 			"FROM (SELECT DEPT.DEPT_NAME DEPARTMENT, " +
 			"CASE " +
@@ -52,7 +52,7 @@ public class SQLSelectStrings {
 			"ON EMP.EMP_ID = WEEK_HOURS.EMP_ID " +
 			"LEFT JOIN Company.DEPARTMENT DEPT " +
 			"ON EMP.EMP_DEPT_ID = DEPT.DEPT_ID " +
-			"WHERE WORK_WEEK.WEEK_ID = 5) SUB " +
+			"WHERE WORK_WEEK.WEEK_ID = ?) SUB " +
 			"GROUP BY DEPARTMENT";
 
 	private String EmployeeByDepartmentHourlyRate =

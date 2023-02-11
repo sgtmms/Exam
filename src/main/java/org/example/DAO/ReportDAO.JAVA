@@ -37,6 +37,7 @@ public class ReportDAO{
             String queryString = sqlSelectStrings.getEmployeePayForASelectedWeekSQL();
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
+            ptmt.setInt(1, weekNumber);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
                 EmployeePayForASelectedWeek employeePayForASelectedWeek = new EmployeePayForASelectedWeek();
@@ -67,13 +68,14 @@ public class ReportDAO{
         return employeePaysForASelectedWeek;
     }
 
-    public ArrayList<DepartmentPayForASelectedWeek> getDepartmentPayForASelectedWeek(Integer weekFive) {
+    public ArrayList<DepartmentPayForASelectedWeek> getDepartmentPayForASelectedWeek(Integer weekNumber) {
         ArrayList<DepartmentPayForASelectedWeek> departmentPaysForASelectedWeek = new ArrayList<>();
 
         try {
             String queryString = sqlSelectStrings.getEmployeePayForASelectedWeekSQL();
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
+            ptmt.setInt(1, weekNumber);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
                 DepartmentPayForASelectedWeek departmentPayForASelectedWeek = new DepartmentPayForASelectedWeek();
@@ -105,7 +107,7 @@ public class ReportDAO{
         return departmentPaysForASelectedWeek;
     }
 
-    public ArrayList<EmployeeByDepartmentHourlyRate>getEmployeeByDepartmentHourlyRate(Integer weekFive) {
+    public ArrayList<EmployeeByDepartmentHourlyRate>getEmployeeByDepartmentHourlyRate() {
         ArrayList<EmployeeByDepartmentHourlyRate> employeeByDepartmentHourlyRates = new ArrayList<>();
 
         try {

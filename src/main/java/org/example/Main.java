@@ -8,7 +8,7 @@ public class Main {
         Integer weekFive = 5;
         ReportDAO reportDAO = new ReportDAO();
         reportDAO.getDepartmentPayForASelectedWeek(weekFive);
-        reportDAO.getEmployeeByDepartmentHourlyRate(weekFive);
+        reportDAO.getEmployeeByDepartmentHourlyRate();
         reportDAO.getEmployeePayForASelectedWeekSQL(weekFive);
     }
 }
