@@ -6,19 +6,15 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-	String driverClassName = "com.mysql.jdbc.Driver";
+	String driverClassName = "com.mysql.cj.jdbc.Driver'";
 	String connectionUrl = "jdbc:mysql://localhost:3306/Company";
-	String dbUser = "postgres";
-	String dbPwd = "postgres";
+	String dbUser = "username";
+	String dbPwd = "password";
 
 	private static ConnectionFactory connectionFactory = null;
 
 	private ConnectionFactory() {
-		try {
-			Class.forName(driverClassName);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	public Connection getConnection() throws SQLException {

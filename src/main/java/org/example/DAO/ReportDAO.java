@@ -10,13 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ReportDAO{
+public class ReportDAO {
     private Connection connection = null;
     private PreparedStatement ptmt = null;
     private ResultSet resultSet = null;
 
     private SQLSelectStrings sqlSelectStrings = null;
-
 
 
     public ReportDAO() {
@@ -30,7 +29,7 @@ public class ReportDAO{
         return conn;
     }
 
-    public ArrayList<EmployeePayForASelectedWeek> getEmployeePayForASelectedWeekSQL(Integer weekNumber) {
+    public ArrayList<EmployeePayForASelectedWeek> getEmployeePayForASelectedWeekSQL(Integer weekNumber, Integer year) {
         ArrayList<EmployeePayForASelectedWeek> employeePaysForASelectedWeek = new ArrayList<>();
 
         try {
@@ -38,6 +37,7 @@ public class ReportDAO{
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             ptmt.setInt(1, weekNumber);
+            ptmt.setInt(2, year);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
                 EmployeePayForASelectedWeek employeePayForASelectedWeek = new EmployeePayForASelectedWeek();
@@ -68,21 +68,20 @@ public class ReportDAO{
         return employeePaysForASelectedWeek;
     }
 
-    public ArrayList<DepartmentPayForASelectedWeek> getDepartmentPayForASelectedWeek(Integer weekNumber) {
+    public ArrayList<DepartmentPayForASelectedWeek> getDepartmentPayForASelectedWeek(Integer weekNumber, Integer year) {
         ArrayList<DepartmentPayForASelectedWeek> departmentPaysForASelectedWeek = new ArrayList<>();
 
         try {
-            String queryString = sqlSelectStrings.getEmployeePayForASelectedWeekSQL();
+            String queryString = sqlSelectStrings.getDepartmentPayForASelectedWeek();
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             ptmt.setInt(1, weekNumber);
+            ptmt.setInt(2, year);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
                 DepartmentPayForASelectedWeek departmentPayForASelectedWeek = new DepartmentPayForASelectedWeek();
                 departmentPayForASelectedWeek.setPayForTheWeek(resultSet.getFloat("PAY_FOR_SELECTED_WEEK"));
-                departmentPayForASelectedWeek.setDepartmentName(resultSet.getString("DEPARTMENT_NAME"));
-
-
+                departmentPayForASelectedWeek.setDepartmentName(resultSet.getString("DEPARTMENT"));
                 departmentPaysForASelectedWeek.add(departmentPayForASelectedWeek);
                 System.out.println(departmentPayForASelectedWeek.toString());
             }
@@ -111,17 +110,16 @@ public class ReportDAO{
         ArrayList<EmployeeByDepartmentHourlyRate> employeeByDepartmentHourlyRates = new ArrayList<>();
 
         try {
-            String queryString = sqlSelectStrings.getEmployeePayForASelectedWeekSQL();
+            String queryString = sqlSelectStrings.getEmployeeByDepartmentHourlyRate();
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
+
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
                 EmployeeByDepartmentHourlyRate employeeByDepartmentHourlyRate = new EmployeeByDepartmentHourlyRate();
-                employeeByDepartmentHourlyRate.setHourlyRate(resultSet.getFloat("PAY_FOR_SELECTED_WEEK"));
-                employeeByDepartmentHourlyRate.setDepartmentName(resultSet.getString("DEPARTMENT_NAME"));
+                employeeByDepartmentHourlyRate.setDepartmentName(resultSet.getString("DEPT_NAME"));
                 employeeByDepartmentHourlyRate.setFirstName(resultSet.getString("FIRST_NAME"));
                 employeeByDepartmentHourlyRate.setLastName(resultSet.getString("LAST_NAME"));
-
                 employeeByDepartmentHourlyRates.add(employeeByDepartmentHourlyRate);
                 System.out.println(employeeByDepartmentHourlyRate.toString());
             }
@@ -145,8 +143,6 @@ public class ReportDAO{
 
         return employeeByDepartmentHourlyRates;
     }
-
-
 
 
 }
