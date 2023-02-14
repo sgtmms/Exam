@@ -120,6 +120,7 @@ public class ReportDAO {
                 employeeByDepartmentHourlyRate.setDepartmentName(resultSet.getString("DEPT_NAME"));
                 employeeByDepartmentHourlyRate.setFirstName(resultSet.getString("FIRST_NAME"));
                 employeeByDepartmentHourlyRate.setLastName(resultSet.getString("LAST_NAME"));
+                employeeByDepartmentHourlyRate.setHourlyRate(resultSet.getFloat("HOURLY_RATE"));
                 employeeByDepartmentHourlyRates.add(employeeByDepartmentHourlyRate);
                 System.out.println(employeeByDepartmentHourlyRate.toString());
             }

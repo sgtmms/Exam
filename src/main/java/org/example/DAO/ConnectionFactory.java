@@ -8,8 +8,8 @@ public class ConnectionFactory {
 
 	String driverClassName = "com.mysql.cj.jdbc.Driver'";
 	String connectionUrl = "jdbc:mysql://localhost:3306/Company";
-	String dbUser = "username";
-	String dbPwd = "password";
+	String dbUser = "root";
+	String dbPwd = "drowssap";
 
 	private static ConnectionFactory connectionFactory = null;
 
